@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="cont">hello</div>
+</body>
+</html>
+    
+<script>
+    // step -1 : select/catch the element
+    const element = document.getElementById("cont")
+    console.log(element)
+
+    // step -2 : read/get values from element
+    const data = element.innerText
+    console.log(data)
+
+    // step -3 : write/update
+    element.innerText = "Hi"
+</script>

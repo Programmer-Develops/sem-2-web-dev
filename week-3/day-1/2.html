@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Object</title>
+</head>
+<body>
+    <button>Click Me!</button>
+</body>
+</html>
+
+<script>
+    const el = document.querySelector("button")
+    el.addEventListener("click", greet)
+
+    function greet(event) {
+        console.log(event)
+        console.log(event.target)
+        console.log(event.type)
+        console.log(event.target.innerText)
+        alert("Button was clicked!")
+    }
+</script>
+
+<!-- when we are attaching an event using add event listener method one event object is created by the javascript
+     if you want to access this event object, we can access it by passing any variable in event handler parameter. -->

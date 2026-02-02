@@ -1,0 +1,41 @@
+<script type="text/javascript">
+    // 1. SHOW NAME (Done for you)
+    function showName() {
+        const nameValue = document.getElementById("name").value;
+        document.getElementById("dName").innerText = nameValue;
+    }
+
+    // 2. SHOW GENDER
+    function showGender() {
+        const genderValue = document.getElementById("gender").value;
+        document.getElementById("dGender").innerText = genderValue;
+    }
+
+    // 3. SHOW EMAIL
+    function showEmail() {
+        const emailValue = document.getElementById("email").value;
+        document.getElementById("dEmail").innerText = emailValue;
+    }
+
+    // Extra: SHOW MOBILE (Included since you have a button for it!)
+    function showMobile() {
+        const mobileValue = document.getElementById("mobile").value;
+        document.getElementById("dMobile").innerText = mobileValue;
+    }
+
+    // 4. RESET FORM
+    function resetForm() {
+        document.getElementById("name").value = "";
+        document.getElementById("gender").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("mobile").value = "";
+    }
+    
+    // 5. RESET DISPLAY
+    function resetDisplay() {
+        document.getElementById("dName").innerText = "NAME";
+        document.getElementById("dGender").innerText = "GENDER";
+        document.getElementById("dEmail").innerText = "EMAIL";
+        document.getElementById("dMobile").innerText = "MOBILE";
+    }
+</script>

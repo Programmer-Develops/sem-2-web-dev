@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create elements with JS</title>
+</head>
+<body>
+    <!-- <div class = "cont">Hello world</div> -->
+</body>
+</html>
+<script>
+    const e = document.createElement("div")
+    console.log(e)
+    const img = document.createElement("img")
+    img.src = 'earth.png'
+    // e.innerText = "Hello world"
+    e.setAttribute("class", "cont")
+    // e.style.color = "blue"
+    // e.style.fontSize = "100px"
+    console.log(e)
+    e.appendChild(img)
+    document.querySelector("body").append(e)
+</script>
