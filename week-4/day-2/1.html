@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+</head>
+<body>
+    <h1>Local Storage Demo</h1>
+    
+</body>
+</html>
+
+<script>
+    // 1. write/save/set in LS
+    localStorage.setItem("name", "Shantanu");
+    localStorage.setItem("age", 18);
+    localStorage.setItem("status", true);
+
+    // 2. read/get from LS
+    const name = localStorage.getItem("name");
+    const age = localStorage.getItem("age");
+    const status = localStorage.getItem("status");
+
+    console.log(name, age, status);
+
+    // 3. remove from LS
+    localStorage.removeItem("status");
+
+    // 4. clear all LS
+    localStorage.clear();
+
+    // Json Stringify and Parse
+    localStorage.setItem("fruits", JSON.stringify([
+        "apple",
+        "banana", 
+        "grapes"
+    ]));
+
+    const fruits = JSON.parse(localStorage.getItem("fruits"));
+    console.log(fruits[1], typeof fruits);
+    
+    localStorage.setItem("user", JSON.stringify({
+        name: "Shantanu",
+        age: 18,
+        status: true
+    }))
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+</script>
