@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>innerText vs innerHTML vs textContent</title>
+</head>
+<body>
+    <h1>My <b style="display: none;">Web</b> Page</h1>
+</body>
+</html>
+<script>
+    const el = document.querySelector('h1');
+    console.log("innerText: ",el.innerText);
+    console.log("innerHTML: ",el.innerHTML);
+    console.log("textContent: ",el.textContent);
+</script>
