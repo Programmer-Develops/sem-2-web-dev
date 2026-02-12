@@ -19,14 +19,16 @@
 //      This means that while one task is waiting for a response (like fetching data from an API),
 //      other tasks can continue to execute without being blocked.   
 //-----------------------------------------------------------------------------------|
-// console.log("start");
+console.log("start");
 
-// function myFunction() {
-//     setTimeout(() => {
-//         console.log("inside function");
-//     }, 1000);   
-// }
+function myFunction(callback) {
+    setTimeout(() => {
+        callback("inside function");    
+    }, 1000);   
+}
 
-// myFunction();
+myFunction((e) => {
+    console.log(e);
+});
 
-// console.log("end");
+console.log("end");
