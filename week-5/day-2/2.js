@@ -32,7 +32,7 @@ function fetchMovie(movieId, callback) {
     callback(`Movie with id ${movieId} is "${movies[movieId]}"`);
   }, 1000);
 }
-
+-
 signIn("john_doe", "password123", (message) => {
   console.log(message);
   if (message.startsWith("Welcome")) {
