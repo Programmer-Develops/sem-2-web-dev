@@ -1,0 +1,55 @@
+<!-- Smart Event Dashboard -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Event Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Event Dashboard</h1>
+        <div class="eventForm">
+            <h2>Add New Event</h2>
+            <form id = 'eventForm'>
+                <label for = 'eventName'>Event Name:</label>
+                <input type = 'text' id = 'eventName' required><br>
+
+                <label for = 'eventDate'>Event Date:</label>
+                <input type = 'date' id = 'eventDate' required><br>
+
+                <label for = 'eventCategory'>Event Category:</label>
+                <select id = 'eventCategory' required>
+                    <option value="">Select Category</option>
+                    <option value="Conference">Conference</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Webinar">Webinar</option>
+                    <option value="Meetup">Meetup</option>
+                </select><br>
+
+                <label for = 'eventDescription'>Event Description:</label>
+                <textarea id = 'eventDescription' rows="4" required></textarea><br>
+
+                <input type = 'submit' value = 'Add Event'>
+            </form>
+        </div>
+        <div class="eventList">
+            <h2>My Events</h2>
+            <div class="eventListHeader">
+                <button id = 'clearEvents'>Clear All Events</button>
+                <button id = 'addSampleEvents'>Add Sample Events</button>
+            </div>
+            <div id = "cardContainer" class="cardContainer">
+                    <!-- Event cards will be dynamically added here -->
+            </div>
+        </div>
+        <div class = "domManipulationDemo">
+            <div class="dmd">
+                <h3>innerText vs innerHTML vs textContent</h3>
+                <p id = "dom-para" class="demo-para"></p>
+            </div>
+        </div>
+    </div>
+</html>
