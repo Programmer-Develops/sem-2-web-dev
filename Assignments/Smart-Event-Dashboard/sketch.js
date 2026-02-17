@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'event-card';
             card.innerHTML = `
-                <h3>${escapeHTML(event.name)}</h3>
+                <h3>${event.name}</h3>
                 <div class="event-meta">
                     <span class="event-date">${formatDate(event.date)}</span>
                     <span class="event-category ${event.category.toLowerCase()}">${event.category}</span>
                 </div>
-                <p class="event-desc">${escapeHTML(event.description)}</p>
+                <p class="event-desc">${event.description}</p>
                 <button class="delete-btn" data-index="${index}">Delete</button>
             `;
             cardContainer.appendChild(card);
@@ -124,15 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
             month: 'short',
             year: 'numeric'
         });
-    }
-
-    function escapeHTML(str) {
-        return str
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
     }
 
     // adding event listener to demoPara to change its text on listening any user event like click, mouseover, mouseout, etc.
