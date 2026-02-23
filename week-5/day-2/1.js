@@ -25,6 +25,10 @@ function myFunction(callback) {
     setTimeout(() => {
         callback("inside function");    
     }, 1000);   
+
+    setInterval(() => {
+        console.log("Interval")
+    }, 3000)
 }
 
 myFunction((e) => {
