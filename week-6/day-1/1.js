@@ -33,3 +33,52 @@
 //  However, only the declarations are hoisted, not the initializations. 
 //  This can lead to unexpected behavior if you try to access a variable before it has been assigned a value.
 // ------------------------------------------------------------------------------------|
+
+// ------------------------------------------------------------------------------------|
+// 4. Lexical Scope in JS: It refers to the visibility of variables and functions based on their location in the source code.
+//  In JavaScript, variables and functions are accessible within the block of code where they are defined, as well as in any nested blocks.
+//  This means that a variable declared inside a function is not accessible outside of that function, but it can be accessed by any inner functions defined within it.
+//  Lexical scope is determined at the time of writing the code, and it does not change during runtime.
+// ------------------------------------------------------------------------------------|
+
+// hello()
+// function hello() {
+//     console.log(name); // undefined
+//     console.log(age); // err
+
+//     var name = 'ram';
+//     let age = 25;
+
+//     console.log(name); // ram
+//     console.log(age); // 25
+
+//     if (true) {
+//         name = 'shyam';
+//         age = 21
+
+//         console.log(name) // shyam
+//         console.log(age); // 21
+//     }
+
+//     console.log(name); // shyam
+//     console.log(age); // 21
+// }
+// hello();
+
+// hello()
+function hello() {
+    console.log(name); // undefined
+    console.log(age); // err
+
+    if (true) {
+    var  name = 'shyam'; 
+    let age = 21
+
+    console.log(name) // shyam
+    console.log(age); // 21
+    }
+
+    console.log(name); // shyam
+    console.log(age); // err
+}
+hello();
