@@ -7,7 +7,6 @@ async function getWeather(address) {
     const API = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${address}`;
     try {
         root.innerHTML = `<p>Loading weather for ${address}...</p>`;
-        // show loading state
         root.innerHTML = `<p class="loading">Loading weather for ${address}...</p>`;
         title.textContent = "Loading Weather Data..."
 
@@ -42,12 +41,11 @@ async function getWeather(address) {
     }
 }
 
-// wire up button click to call getWeather with the user-entered city
 const button = document.getElementById("getWeather");
 const cityInput = document.getElementById("city");
 
 function handleFetch() {
-    const city = cityInput.value.trim(); // get the city name from the input and trim any extra whitespace
+    const city = cityInput.value.trim(); // getting the city name from the input and trim any extra whitespace
     if (city) {
         getWeather(city);
     } else {
@@ -57,7 +55,6 @@ function handleFetch() {
 
 button.addEventListener("click", handleFetch);
 
-// allow pressing Enter in the input to trigger fetching
 cityInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         handleFetch();
