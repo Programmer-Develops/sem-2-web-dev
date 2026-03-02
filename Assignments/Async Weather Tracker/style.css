@@ -1,0 +1,81 @@
+:root{
+  --bg: #f7fbff;
+  --card: #ffffff;
+  --accent: #2b82ff;
+  --muted: #6b7280;
+}
+
+* { box-sizing: border-box; }
+
+body{
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, var(--bg), #eef4ff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 16px;
+  color: #0f172a;
+  gap: 12px;
+  text-align: center;
+}
+
+h2{
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  letter-spacing: 0.2px;
+}
+
+/* Input row (inputs are direct children in markup) */
+#city,
+#getWeather {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#city{
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  width: 240px;
+  font-size: 15px;
+}
+
+#getWeather{
+  padding: 10px 14px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: white;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#getWeather:hover{ opacity: 0.95 }
+
+/* Results card */
+#root{
+  margin-top: 18px;
+  width: 100%;
+  max-width: 520px;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(2,6,23,0.06);
+  padding: 18px;
+  min-height: 92px;
+  text-align: left;
+}
+
+#root h3{ margin: 0 0 8px 0; font-size: 18px; }
+#root p{ margin: 6px 0; color: var(--muted); }
+
+@media (max-width: 420px){
+  #city{ width: 160px; }
+  #root{ padding: 14px; }
+}
+
+.loading{ color: var(--accent); font-weight: 600 }
+.error{ color: #b91c1c; font-weight: 600 }
