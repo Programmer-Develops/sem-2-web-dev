@@ -62,8 +62,3 @@ This repository contains exercises, assignments, and in-class practice for a uni
 
 ---
 
-If you'd like, I can also:
-- add a simple `.gitignore` template,
-- create a CONTRIBUTING.md with a PR template,
-- or run a quick check for large files that shouldn't be committed.
-
