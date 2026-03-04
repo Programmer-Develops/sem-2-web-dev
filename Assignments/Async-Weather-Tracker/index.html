@@ -7,12 +7,70 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <h2>Async Weather Tracker</h2>
-        <input type="text" id="city" placeholder="Enter city name" />
-        <button id="getWeather">Get Weather</button>
+        <div class="container">
+            <header class="header">
+                <div class="header-content">
+                    <div class="header-icon">🌤️</div>
+                    <div>
+                        <h1>Async Weather Tracker</h1>
+                        <p class="header-subtitle">Real-time weather with async operations</p>
+                    </div>
+                </div>
+            </header>
 
-        <div id="root">
-            <!-- Weather data will be displayed here -->
+            <div class="content">
+                <div class="left-panel">
+                    <div class="search-section">
+                        <h2>Search City</h2>
+                        <div class="search-input-group">
+                            <input type="text" id="city" placeholder="Enter city name" />
+                            <button id="getWeather">Search</button>
+                        </div>
+                    </div>
+
+                    <div class="history-section">
+                        <h2>Search History</h2>
+                        <div class="history-tags" id="history">
+                            <!-- Search history tags will be added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-panel">
+                    <div class="weather-section">
+                        <h2>Weather Info</h2>
+                        <div class="weather-info" id="weatherDisplay">
+                            <div class="weather-field">
+                                <span class="weather-label">City</span>
+                                <span class="weather-value">-</span>
+                            </div>
+                            <div class="weather-field">
+                                <span class="weather-label">Temp</span>
+                                <span class="weather-value">-</span>
+                            </div>
+                            <div class="weather-field">
+                                <span class="weather-label">Weather</span>
+                                <span class="weather-value">-</span>
+                            </div>
+                            <div class="weather-field">
+                                <span class="weather-label">Humidity</span>
+                                <span class="weather-value">-</span>
+                            </div>
+                            <div class="weather-field">
+                                <span class="weather-label">Wind</span>
+                                <span class="weather-value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="console-section">
+                <h2>Console – Event Loop</h2>
+                <div class="console-output" id="consoleOutput">
+                    <!-- Console logs will be displayed here -->
+                </div>
+            </div>
         </div>
 
         <script type="module" src="./app.js"></script>

@@ -1,63 +1,169 @@
 const API_KEY = "e8271fd7cb3349939f254830260203";
-const root = document.getElementById("root");
 
-const title = document.getElementById("title");
+const cityInput = document.getElementById("city");
+const searchButton = document.getElementById("getWeather");
+const weatherDisplay = document.getElementById("weatherDisplay");
+const historyContainer = document.getElementById("history");
+const consoleOutput = document.getElementById("consoleOutput");
 
-async function getWeather(address) {
-    const API = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${address}`;
-    try {
-        root.innerHTML = `<p>Loading weather for ${address}...</p>`;
-        root.innerHTML = `<p class="loading">Loading weather for ${address}...</p>`;
-        title.textContent = "Loading Weather Data..."
+let searchHistory = JSON.parse(localStorage.getItem("weatherHistory")) || [];
 
-        fetch(API)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Server returned ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                if (data.error) {
-                    root.innerHTML = `<p class="error">${data.error.message}</p>`;
-                    return;
-                }
-                root.innerHTML = `
-                    <h3>Weather in ${data.location.name}</h3>
-                    <p>Temperature: ${data.current.temp_c}°C</p>
-                    <p>Condition: ${data.current.condition.text}</p>
-                `;
-            })
-            .catch((error) => {
-                root.innerHTML = `<p class="error">Error fetching weather data: ${error.message}</p>`;
-            })
-            .finally(() => {
-                console.log('fetch completed for', address);
-                title.textContent = "Async Weather Tracker"
-            });
-    } catch (error) {
-        root.innerHTML = `<p>Error fetching weather data: ${error.message}</p>`;
-        title.textContent = "Error"
-    }
+const customConsole = {
+  logs: [],
+  log(type, message) {
+    const logEntry = `📍 ${type} ${message}`;
+    this.logs.push({ type, message: logEntry });
+    this.render();
+  },
+  render() {
+    consoleOutput.innerHTML = this.logs
+      .map(
+        (log) => `<div class="console-log ${log.type.toLowerCase()}">${log.message}</div>`
+      )
+      .join("");
+    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+  },
+};
+
+function renderHistory() {
+  historyContainer.innerHTML = searchHistory
+    .map(
+      (city) =>
+        `<div class="history-tag" onclick="searchCityFromHistory('${city}')">${city}</div>`
+    )
+    .join("");
 }
 
-const button = document.getElementById("getWeather");
-const cityInput = document.getElementById("city");
+window.searchCityFromHistory = function (city) {
+  cityInput.value = city;
+  handleFetch();
+};
+
+function addToHistory(city) {
+  if (!searchHistory.includes(city)) {
+    searchHistory.unshift(city);
+    if (searchHistory.length > 5) {
+      searchHistory.pop();
+    }
+    localStorage.setItem("weatherHistory", JSON.stringify(searchHistory));
+    renderHistory();
+  }
+}
+
+function getWeather(address) {
+  const API = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${address}`;
+
+  console.log("Sync Start");
+  customConsole.log("SYNC", "Start");
+
+  console.log("[ASYNC] Start fetching");
+  customConsole.log("ASYNC", "Start fetching");
+
+  fetch(API)
+    .then(function(response) {
+      console.log("Promise.then (Microtask)");
+      customConsole.log("PROMISE", "Promise.then (Microtask)");
+
+      if (!response.ok) {
+        throw new Error(`Server returned ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      console.log("setTimeout (Macrotask)");
+      customConsole.log("PROMISE", "setTimeout (Macrotask)");
+
+      if (data.error) {
+        console.log(`Error: ${data.error.message}`);
+        customConsole.log("ERROR", data.error.message);
+        updateWeatherDisplay(null);
+        return;
+      }
+
+      console.log("[ASYNC] Data received");
+      customConsole.log("ASYNC", "Data received");
+
+      updateWeatherDisplay(data);
+      addToHistory(address);
+    })
+    .catch(function(error) {
+      console.log(`Error: ${error.message}`);
+      customConsole.log("ERROR", error.message);
+      updateWeatherDisplay(null);
+    })
+    .finally(function() {
+      console.log("Sync End");
+      customConsole.log("SYNC", "End");
+    });
+}
+
+function updateWeatherDisplay(data) {
+  if (!data) {
+    weatherDisplay.innerHTML = `
+      <div class="weather-field">
+        <span class="weather-label">City</span>
+        <span class="weather-value">-</span>
+      </div>
+      <div class="weather-field">
+        <span class="weather-label">Temp</span>
+        <span class="weather-value">-</span>
+      </div>
+      <div class="weather-field">
+        <span class="weather-label">Weather</span>
+        <span class="weather-value">-</span>
+      </div>
+      <div class="weather-field">
+        <span class="weather-label">Humidity</span>
+        <span class="weather-value">-</span>
+      </div>
+      <div class="weather-field">
+        <span class="weather-label">Wind</span>
+        <span class="weather-value">-</span>
+      </div>
+    `;
+    return;
+  }
+
+  weatherDisplay.innerHTML = `
+    <div class="weather-field">
+      <span class="weather-label">City</span>
+      <span class="weather-value">${data.location.name}, ${data.location.region}</span>
+    </div>
+    <div class="weather-field">
+      <span class="weather-label">Temp</span>
+      <span class="weather-value">${data.current.temp_c}°C</span>
+    </div>
+    <div class="weather-field">
+      <span class="weather-label">Weather</span>
+      <span class="weather-value">${data.current.condition.text}</span>
+    </div>
+    <div class="weather-field">
+      <span class="weather-label">Humidity</span>
+      <span class="weather-value">${data.current.humidity}%</span>
+    </div>
+    <div class="weather-field">
+      <span class="weather-label">Wind</span>
+      <span class="weather-value">${data.current.wind_mps} m/s</span>
+    </div>
+  `;
+}
 
 function handleFetch() {
-    const city = cityInput.value.trim(); // getting the city name from the input and trim any extra whitespace
-    if (city) {
-        getWeather(city);
-    } else {
-        root.innerHTML = `<p>Please enter a city name.</p>`;
-    }
+  const city = cityInput.value.trim();
+  if (city) {
+    getWeather(city);
+  } else {
+    console.log("Please enter a city name");
+    customConsole.log("ERROR", "Please enter a city name");
+  }
 }
 
-button.addEventListener("click", handleFetch);
-
-cityInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        handleFetch();
-    }
+searchButton.addEventListener("click", handleFetch);
+cityInput.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    handleFetch();
+  }
 });
+
+renderHistory();
 
