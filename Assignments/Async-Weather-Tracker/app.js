@@ -5,6 +5,7 @@ const searchButton = document.getElementById("getWeather");
 const weatherDisplay = document.getElementById("weatherDisplay");
 const historyContainer = document.getElementById("history");
 const consoleOutput = document.getElementById("consoleOutput");
+const title = document.getElementById("title");
 
 let searchHistory = JSON.parse(localStorage.getItem("weatherHistory")) || [];
 
@@ -78,6 +79,7 @@ function getWeather(address) {
 
       console.log("[ASYNC] Data received");
       customConsole.log("ASYNC", "Data received");
+      title.textContent = "Async Weather Tracker";
 
       updateWeatherDisplay(data);
       addToHistory(address);
@@ -147,6 +149,7 @@ function updateWeatherDisplay(data) {
 function handleFetch() {
   const city = cityInput.value.trim();
   if (city) {
+    title.textContent = "Loading..."
     getWeather(city);
   } else {
     console.log("Please enter a city name");
