@@ -63,10 +63,6 @@ function getWeather(address) {
     .then(function(response) {
       console.log("Promise.then (Microtask)");
       customConsole.log("PROMISE", "Promise.then (Microtask)");
-
-      if (!response.ok) {
-        throw new Error(`Server returned ${response.status}`);
-      }
       return response.json();
     })
     .then(function(data) {
@@ -143,7 +139,7 @@ function updateWeatherDisplay(data) {
     </div>
     <div class="weather-field">
       <span class="weather-label">Wind</span>
-      <span class="weather-value">${data.current.wind_mps} m/s</span>
+      <span class="weather-value">${data.current.wind_kph} kph</span>
     </div>
   `;
 }
