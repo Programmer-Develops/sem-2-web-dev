@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Cart</title>
+</head>
+<body>
+    <h1>Cart Items</h1>
+    <div id="cartItemsContainer">
+        <!-- Cart items will be displayed here -->
+    </div>
+</body>
+</html>
+
+<script>
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log(cartItems);
+    const cartItemsContainer = document.getElementById("cartItemsContainer");
+    cartItems.forEach(item => {
+        const itemDiv = document.createElement("div");
+        itemDiv.innerHTML = `
+            <h3>${item.title}</h3>
+            <p>Price: $${item.price}</p>
+            <img src="${item.image}" alt="${item.title}" width="100">
+            <Button onclick="removeFromCart(${item.id})">Remove from Cart</Button>
+        `;
+        cartItemsContainer.appendChild(itemDiv);
+    });
+    function removeFromCart(id) {
+        let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        const spliceIndex = cartItems.findIndex(item => item.id === id);
+        if (spliceIndex !== -1) {
+            cartItems.splice(spliceIndex, 1);
+            localStorage.setItem("cart", JSON.stringify(cartItems));
+            location.reload();
+        }
+    }
+</script>

@@ -46,8 +46,10 @@
 </head>
 
 <body>
-    <h2>Products from API</h2>
-
+    <div>
+        <h2>Products from API</h2>
+        <button id="cart"><a href="cart.html">Cart</a></button>
+    </div>
     <div id="root">
         <!-- All product/card come/append here -->
     </div>
@@ -59,13 +61,13 @@
     //Step -1 Get the Data
 
     const api = "https://fakestoreapi.com/products";
-
+    var count = 0;
     // const data = fetch(api)
     //     .then((res) => res.json())
     //     .then((data) => console.log(data)
     //     )
     // console.log(data);
-
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
     fetch(api) // fetch() is used to make a network request to the specified URL (api) and returns a promise that resolves to the response of that request
         .then((res) => res.json()) // 1st then() is used to convert the response into json format
         .then((data) => { // 2nd then() is used to get the data in json format and we can use that data for further processing
@@ -114,10 +116,24 @@
             const rating = document.createElement("button");
             rating.innerText = `Rating: ${el.rating.rate}`;
 
-            box.append(image, title, category, description, price, rating);
+            const cart = document.createElement("button");
+            cart.innerText = "Add to Cart";
+
+            // cart.addEventListener("click", updateCart);
+            cart.addEventListener("click", () => {
+                cartItems.push(el);
+                localStorage.setItem("cart", JSON.stringify(cartItems));
+            })
+
+            box.append(image, title, category, description, price, rating, cart);
             document.querySelector("#root").append(box)
 
         })
+
+        // function updateCart () {
+        //     count ++;
+        //     document.querySelector("#cart").innerText = `Cart = ${count}`;
+        // }
 
     }
 
