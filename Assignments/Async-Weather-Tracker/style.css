@@ -283,3 +283,17 @@ body {
   .weather-section,
   .console-section { padding: 18px; }
 }
+
+.delete-btn {
+  cursor: pointer;
+  font-weight: bold;
+  color: #888;
+  padding: 0 4px;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  color: #d32f2f;
+  transform: scale(1.15);
+}
