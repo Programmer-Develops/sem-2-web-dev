@@ -6,6 +6,460 @@
 
 ### Assignment 1
 
+# React.js — Basics
+
+---
+
+## 1. What is React?
+
+React is an **open-source JavaScript library** used for building fast, interactive, and dynamic **User Interfaces (UIs)** — especially for Single Page Applications (SPAs).
+
+Instead of reloading the whole page on every change, React updates only the parts of the UI that actually changed, making apps feel snappy and smooth.
+
+Key characteristics of React:
+
+- **Component-Based** — UI is broken into small, reusable pieces called components
+- **Declarative** — You describe *what* the UI should look like, React figures out *how* to update it
+- **Virtual DOM** — React keeps a lightweight copy of the real DOM in memory and only applies the minimum necessary changes
+- **Unidirectional Data Flow** — Data flows from parent to child via props, making the app predictable and easy to debug
+
+```jsx
+// A simple React component
+function Hello() {
+  return <h1>Hello, World! 👋</h1>;
+}
+```
+
+---
+
+## 2. Who Made React?
+
+React was created by **Jordan Walke**, a software engineer at **Meta (Facebook)**. It was first deployed on Facebook's News Feed in **2011** and later on Instagram in **2012**.
+
+React was **open-sourced at JSConf US in May 2013** and has since grown into one of the most popular frontend libraries in the world, maintained by Meta and a large open-source community.
+
+| Timeline | Event |
+|----------|-------|
+| 2011 | First used internally at Facebook |
+| 2012 | Deployed on Instagram |
+| 2013 | Open-sourced at JSConf US |
+| 2015 | React Native released |
+| 2022 | React 18 released |
+
+---
+
+## 3. What is Babel?
+
+**Babel** is a JavaScript **transpiler** (source-to-source compiler). It converts modern JavaScript (ES6+) and JSX code into older JavaScript that all browsers can understand.
+
+Without Babel, browsers would throw errors when they encounter JSX like `<h1>Hello</h1>` inside JavaScript, because that is not valid JS syntax natively.
+
+Babel's main jobs in a React project:
+
+- Converts **JSX → `React.createElement()` calls**
+- Converts **ES6+ (arrow functions, classes, modules) → ES5** for older browser support
+- Allows developers to write modern, clean code without worrying about browser compatibility
+
+```
+JSX Code  ──►  Babel  ──►  Valid JavaScript  ──►  Browser
+```
+
+> You can try Babel live at: [https://babeljs.io/repl](https://babeljs.io/repl)
+
+---
+
+## 4. How Does Babel Convert HTML Code in React (JSX) into Valid Code?
+
+Babel converts JSX into `React.createElement()` function calls. The browser does not understand JSX — it only understands plain JavaScript. Babel acts as a translator.
+
+**Before (JSX — what you write):**
+
+```jsx
+const element = <h1 className="title">Hello, React!</h1>;
+```
+
+**After (what Babel compiles it to):**
+
+```js
+const element = React.createElement(
+  "h1",
+  { className: "title" },
+  "Hello, React!"
+);
+```
+
+**A more complex example:**
+
+```jsx
+// JSX you write
+const App = () => (
+  <div id="container">
+    <h1>Welcome</h1>
+    <p>This is React</p>
+  </div>
+);
+```
+
+```js
+// What Babel produces
+const App = () =>
+  React.createElement(
+    "div",
+    { id: "container" },
+    React.createElement("h1", null, "Welcome"),
+    React.createElement("p", null, "This is React")
+  );
+```
+
+So JSX is just **syntactic sugar** — a friendlier way to write `React.createElement()` calls. Babel handles the translation automatically during the build process.
+
+---
+
+## 5. What is ReactDOM Used For? (With Example)
+
+**ReactDOM** is a package that provides methods to render React components into the actual **browser DOM**. It is the bridge between React's virtual world and what the user actually sees on screen.
+
+React handles the *logic and structure* of UI, while ReactDOM handles *putting it on the page*.
+
+**Main method:**
+
+```js
+ReactDOM.createRoot(domNode).render(<App />);
+```
+
+**Full Example:**
+
+```html
+<!-- index.html -->
+<body>
+  <div id="root"></div>
+</body>
+```
+
+```jsx
+// index.js / main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+function App() {
+  return (
+    <div>
+      <h1>Hello from ReactDOM! 🚀</h1>
+      <p>React is rendering this into the #root div.</p>
+    </div>
+  );
+}
+
+// Step 1: Find the root DOM node
+const rootElement = document.getElementById("root");
+
+// Step 2: Create a React root
+const root = ReactDOM.createRoot(rootElement);
+
+// Step 3: Render your App component into it
+root.render(<App />);
+```
+
+Without `ReactDOM`, React components would exist only in memory — `ReactDOM` is what puts them on the screen.
+
+---
+
+## 6. What Packages Do You Need to Import to Work with React?
+
+There are two core packages required to work with React in the browser:
+
+### Package 1: `react`
+
+The core library. It provides `React.createElement`, hooks (`useState`, `useEffect`), component logic, and the virtual DOM.
+
+```bash
+npm install react
+```
+
+```js
+import React from "react";
+```
+
+### Package 2: `react-dom`
+
+The rendering layer for web browsers. It provides `ReactDOM.createRoot()` and `render()` to mount React into the real DOM.
+
+```bash
+npm install react-dom
+```
+
+```js
+import ReactDOM from "react-dom/client";
+```
+
+### Summary Table
+
+| Package | Purpose | Import |
+|---------|---------|--------|
+| `react` | Core library — components, JSX, hooks | `import React from 'react'` |
+| `react-dom` | Renders React into the browser DOM | `import ReactDOM from 'react-dom/client'` |
+
+> In React 17+, you no longer need to explicitly import React in every file for JSX — but it's still needed where you use hooks or `React.createElement` directly.
+
+---
+
+## 7. How Do You Add React to a Web Application?
+
+There are two main ways to add React to a web application:
+
+---
+
+### Method 1: Using Vite (Recommended for New Projects)
+
+```bash
+# Create a new React + Vite project
+npm create vite@latest my-app -- --template react
+
+# Navigate into the project
+cd my-app
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+---
+
+### Method 2: Adding React via CDN (Quick Prototype / Existing HTML Page)
+
+Add these three scripts to your HTML file:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React via CDN</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Step 1: Load React core -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+
+    <!-- Step 2: Load ReactDOM -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Step 3: Load Babel to use JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Step 4: Write your React code -->
+    <script type="text/babel">
+      function App() {
+        return <h1>React is working! 🎉</h1>;
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
+```
+
+> The CDN approach is great for quick demos but **not recommended for production**. Use Vite or Create React App for real projects.
+
+---
+
+## 8. What is `React.createElement`?
+
+`React.createElement` is the **core function** that React uses to create elements (the building blocks of a React app). Every piece of UI in React is ultimately created using this function.
+
+When you write JSX, Babel compiles it into `React.createElement()` calls behind the scenes.
+
+**Syntax:**
+
+```js
+React.createElement(type, props, ...children)
+```
+
+**Example:**
+
+```js
+// This:
+const element = React.createElement("h1", { className: "title" }, "Hello!");
+
+// Is exactly the same as writing this JSX:
+const element = <h1 className="title">Hello!</h1>;
+```
+
+`React.createElement` returns a plain JavaScript **object** (called a React element) that describes what should be rendered:
+
+```js
+{
+  type: "h1",
+  props: {
+    className: "title",
+    children: "Hello!"
+  }
+}
+```
+
+React reads this object and uses it to build the Virtual DOM.
+
+---
+
+## 9. What Are the Three Properties that `createElement` Accepts?
+
+`React.createElement` accepts **three arguments**:
+
+```js
+React.createElement(type, props, children)
+```
+
+---
+
+### Property 1: `type` (required)
+
+The type of element to create. It can be:
+- A **string** for HTML elements: `"div"`, `"h1"`, `"p"`, `"button"`
+- A **React component**: `App`, `Header`, `MyButton`
+
+```js
+React.createElement("div", ...)       // HTML element
+React.createElement(MyComponent, ...) // React component
+```
+
+---
+
+### Property 2: `props` (can be `null`)
+
+An **object** containing the attributes/properties to pass to the element — like `id`, `className`, `style`, `onClick`, etc. Pass `null` if there are no props.
+
+```js
+React.createElement("button", { className: "btn", onClick: handleClick }, ...)
+React.createElement("h1", null, ...)  // no props
+```
+
+---
+
+### Property 3: `children` (optional)
+
+The **content** inside the element. This can be:
+- A plain **string** of text
+- Another `React.createElement()` call (nested elements)
+- Multiple children passed as additional arguments
+
+```js
+// Text child
+React.createElement("h1", null, "Hello World")
+
+// Nested element children
+React.createElement(
+  "div",
+  null,
+  React.createElement("h1", null, "Title"),
+  React.createElement("p", null, "Paragraph")
+)
+```
+
+---
+
+### Full Example Combining All Three:
+
+```js
+React.createElement(
+  "div",                // type
+  { id: "container" }, // props
+  "Hello, React!"       // children
+);
+
+// Equivalent JSX:
+// <div id="container">Hello, React!</div>
+```
+
+---
+
+## 10. What is the Meaning of `render` and `root`?
+
+### `root`
+
+`root` refers to the **mounting point** — the DOM node where your entire React application will live. It is created by calling `ReactDOM.createRoot()` and passing it a real DOM element (usually `<div id="root">` from `index.html`).
+
+```js
+// "root" is the React root container
+const root = ReactDOM.createRoot(document.getElementById("root"));
+```
+
+Think of `root` as the **entry gate** — once created, you use it to tell React where to paint your app.
+
+---
+
+### `render`
+
+`render` is the **method called on the root** that actually displays your React component tree on the screen. It takes a React element or component and injects it into the DOM node specified by `root`.
+
+```js
+root.render(<App />);
+```
+
+Think of `render` as pressing the **"paint" button** — it takes your React component and puts it on the page.
+
+---
+
+### Together — Full Example:
+
+```html
+<!-- index.html -->
+<div id="root"></div>
+```
+
+```jsx
+// main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+function App() {
+  return <h1>My React App 🚀</h1>;
+}
+
+// 1. Find the DOM node
+const domNode = document.getElementById("root");
+
+// 2. Create the React root (the mounting point)
+const root = ReactDOM.createRoot(domNode);
+
+// 3. Render — paint the App component into the root
+root.render(<App />);
+```
+
+### Visual Flow:
+
+```
+index.html                    React
+────────────────────          ──────────────────────────────────
+<div id="root">     ◄──────   ReactDOM.createRoot()  →  root
+</div>                        root.render(<App />)
+
+                              Result: <App /> appears inside #root
+```
+
+| Term | What it means |
+|------|--------------|
+| `root` | The React container tied to a real DOM node (`#root`) |
+| `render` | The method that paints your React component into that container |
+
+---
+
+## Quick Reference Summary
+
+| # | Topic | One-line Summary |
+|---|-------|-----------------|
+| 1 | React | JS library for building fast, component-based UIs |
+| 2 | Creator | Jordan Walke at Meta (Facebook), open-sourced 2013 |
+| 3 | Babel | Transpiler that converts JSX and modern JS into browser-compatible code |
+| 4 | Babel conversion | JSX → `React.createElement()` calls automatically |
+| 5 | ReactDOM | Renders React components into the real browser DOM |
+| 6 | Required packages | `react` (core) + `react-dom` (rendering) |
+| 7 | Adding React | Via Vite/CRA for projects, or CDN for quick demos |
+| 8 | `React.createElement` | Core function that creates React elements (what JSX compiles to) |
+| 9 | 3 properties | `type` (tag/component), `props` (attributes), `children` (content) |
+| 10 | render & root | `root` = mounting point; `render` = paints component into root |
+
 **Q1. What is the purpose of `package.json` in a React project?**
 
 `package.json` is the configuration file for a Node.js/React project. It stores metadata about the project (name, version, description), lists all dependencies (libraries the project needs to run) and devDependencies (tools needed only during development), and defines scripts (like `start`, `build`, `test`) that can be run via `npm run <script>`. It also specifies the Node.js version compatibility.
