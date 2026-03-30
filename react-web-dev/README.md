@@ -22,6 +22,8 @@ Key characteristics of React:
 - **Declarative** — You describe *what* the UI should look like, React figures out *how* to update it
 - **Virtual DOM** — React keeps a lightweight copy of the real DOM in memory and only applies the minimum necessary changes
 - **Unidirectional Data Flow** — Data flows from parent to child via props, making the app predictable and easy to debug
+- **Single Page Application**
+- **Web and app mobile capability**
 
 ```jsx
 // A simple React component
