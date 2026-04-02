@@ -110,11 +110,34 @@ function App() {
             </li>
           </ul>
         </div>
+        
       </section>
-
       <div className="ticks"></div>
       <section id="spacer"></section>
+      <Guide/>
+      <hr />
+      <Footer />
     </>
+  )
+}
+
+// more react components
+
+function Guide() {
+  return (
+    <div className="guide">
+      <h2>Guide</h2>
+      <p>Welcome to the Guide!</p>
+      <p>this is my first react function component in my-vite-app</p>
+    </div>
+  )
+}
+
+function Footer() {
+  return (
+    <footer>
+      <p>© 2024 my-vite-app. All rights reserved.</p>
+    </footer>
   )
 }
 
