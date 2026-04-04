@@ -341,3 +341,10 @@ tbody tr:hover {
     border-right-color: var(--border);
   }
 }
+
+.analysis {
+  background: var(--accent-bg);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--accent-border);
+}

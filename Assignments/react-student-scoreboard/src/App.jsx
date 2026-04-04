@@ -39,7 +39,11 @@ function App() {
       <div className = 'register-student'>
         <Register addStudent={addStudent} />
       </div>
-      <div className = 'records'>
+      <div className='analysis'>
+        <p>Total Students: {students.length}</p>
+        <p>Average Score: {students.length > 0 ? (students.reduce((sum, student) => sum + student.score, 0) / students.length).toFixed(2) : 0}</p>
+      </div>
+      <div className='records'>
         <Records 
           students={students} 
           editingIndex={editingIndex}
