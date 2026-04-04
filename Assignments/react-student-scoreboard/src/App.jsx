@@ -1,8 +1,8 @@
-// import { useState } from 'react'
 import { useState } from 'react'
 import './App.css'
 import Register from './Components/Register'
 import Records from './Components/Records'
+import Analytics from './Components/Analytics'
 
 function App() {
   const [students, setStudents] = useState([]);
@@ -20,9 +20,9 @@ function App() {
 
   const saveEdit = () => {
     if (editingIndex !== null) {
-      const updatedStudents = [...students];
-      updatedStudents[editingIndex].score = Number(editScore);
-      setStudents(updatedStudents);
+      const updated = [...students];
+      updated[editingIndex] = { ...updated[editingIndex], score: Number(editScore) };
+      setStudents(updated);
       setEditingIndex(null);
       setEditScore('');
     }
@@ -35,27 +35,26 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>Student Scoreboard</h1>
-      <div className = 'register-student'>
-        <Register addStudent={addStudent} />
+      <div className="app-header">
+        <h1>Student Scoreboard</h1>
+        <p>Track, update, and analyze student performance</p>
       </div>
-      <div className='analysis'>
-        <p>Total Students: {students.length}</p>
-        <p>Average Score: {students.length > 0 ? (students.reduce((sum, student) => sum + student.score, 0) / students.length).toFixed(2) : 0}</p>
-      </div>
-      <div className='records'>
-        <Records 
-          students={students} 
-          editingIndex={editingIndex}
-          editScore={editScore}
-          onEditScoreChange={setEditScore}
-          onStartEdit={startEdit}
-          onSaveEdit={saveEdit}
-          onCancelEdit={cancelEdit}
-        />
-      </div>
+
+      <Analytics students={students} />
+
+      <Register addStudent={addStudent} />
+
+      <Records
+        students={students}
+        editingIndex={editingIndex}
+        editScore={editScore}
+        onEditScoreChange={setEditScore}
+        onStartEdit={startEdit}
+        onSaveEdit={saveEdit}
+        onCancelEdit={cancelEdit}
+      />
     </div>
-  )
+  );
 }
 
 export default App

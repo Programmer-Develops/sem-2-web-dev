@@ -6,20 +6,21 @@ function Register({ addStudent }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name && score) {
-      addStudent({ name, score: Number(score) });
+    const parsed = Number(score);
+    if (name.trim() && score !== '' && parsed >= 0 && parsed <= 100) {
+      addStudent({ name: name.trim(), score: parsed });
       setName('');
       setScore('');
     }
   };
 
   return (
-    <div>
-      <h2>Register Student</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="card">
+      <div className="card-title">Add Student</div>
+      <form className="form-row" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Student Name"
+          placeholder="Student name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -33,7 +34,7 @@ function Register({ addStudent }) {
           max="100"
           required
         />
-        <button type="submit">Add Student</button>
+        <button type="submit" className="add-btn">Add</button>
       </form>
     </div>
   );
