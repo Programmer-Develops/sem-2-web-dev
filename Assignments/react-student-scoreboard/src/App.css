@@ -139,11 +139,55 @@ tbody tr:hover {
   transition: background-color 0.3s;
 }
 
-.edit-btn:hover {
-  background: var(--accent-border);
+.edit-input {
+  width: 80px;
+  padding: 5px 8px;
+  border: 2px solid var(--accent);
+  border-radius: 3px;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* Responsive Design */
+.edit-input:focus {
+  outline: none;
+  border-color: var(--accent-border);
+}
+
+.edit-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.save-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background: #16a34a;
+}
+
+.cancel-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.cancel-btn:hover {
+  background: #dc2626;
+}
 @media (max-width: 768px) {
   .app-container {
     padding: 10px;
@@ -168,13 +212,6 @@ tbody tr:hover {
 
   th, td {
     padding: 10px;
-  }
-}
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
   }
 }
 

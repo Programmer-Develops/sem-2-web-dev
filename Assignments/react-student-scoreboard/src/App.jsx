@@ -6,9 +6,31 @@ import Records from './Components/Records'
 
 function App() {
   const [students, setStudents] = useState([]);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editScore, setEditScore] = useState('');
 
   const addStudent = (student) => {
     setStudents([...students, student]);
+  };
+
+  const startEdit = (index) => {
+    setEditingIndex(index);
+    setEditScore(students[index].score.toString());
+  };
+
+  const saveEdit = () => {
+    if (editingIndex !== null) {
+      const updatedStudents = [...students];
+      updatedStudents[editingIndex].score = Number(editScore);
+      setStudents(updatedStudents);
+      setEditingIndex(null);
+      setEditScore('');
+    }
+  };
+
+  const cancelEdit = () => {
+    setEditingIndex(null);
+    setEditScore('');
   };
 
   return (
@@ -18,7 +40,15 @@ function App() {
         <Register addStudent={addStudent} />
       </div>
       <div className = 'records'>
-        <Records students={students} />
+        <Records 
+          students={students} 
+          editingIndex={editingIndex}
+          editScore={editScore}
+          onEditScoreChange={setEditScore}
+          onStartEdit={startEdit}
+          onSaveEdit={saveEdit}
+          onCancelEdit={cancelEdit}
+        />
       </div>
     </div>
   )
