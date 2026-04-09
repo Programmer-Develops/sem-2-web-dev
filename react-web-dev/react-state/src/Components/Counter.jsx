@@ -13,9 +13,9 @@ function Counter() {
     }
 
   return (
-    <div className='className="text-center"'>
+    <div className="text-center my-4 text-700 text-2xl">
       <h1 >Count: {count}</h1>
-      <div>
+      <div className="space-x-4 my-4">
         <button onClick={handleAdd}>Add</button>
         <button onClick= {handleReduce} disabled = {count<1}>Reduce</button>
         <button onClick= {handleReset}>Reset</button>
