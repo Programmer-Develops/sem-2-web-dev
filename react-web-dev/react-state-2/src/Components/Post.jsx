@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 function Post() {
     const [post, setPost] = useState([]);
@@ -18,10 +18,15 @@ function Post() {
         }
     }
 
+    // Mount phase
+    useEffect(()=>{
+        fetchAndGetPost();
+    }, []);
+
     return (
         <div>
             <h1>Welcome to Post App</h1>
-            <button onClick = { fetchAndGetPost }>Get Post</button>
+            {/* <button onClick = { fetchAndGetPost }>Get Post</button> */}
             <hr/>
 
             {post.map((el) => {
