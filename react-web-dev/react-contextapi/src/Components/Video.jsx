@@ -19,7 +19,7 @@ export default function Video() {
             <video
             ref={ref}
             controls
-            src = "video.mp4"
+            src = "/video.mp4"
             ></video>
             <hr />
             <button onClick={handlePlay}>Play</button>
