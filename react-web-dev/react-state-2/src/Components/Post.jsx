@@ -12,13 +12,8 @@ function Post() {
         ); // 1st .then() will get readable stream and convert it to json, 2nd .then() will get the actual data
     }
     const handlePage=(val) => {
-        const newPage = page+val;
+        const newPage = page + val;
         setPage(newPage)
-    }
-    const getData = (api) => {
-        return fetch(api).then((res) => 
-            res.json() 
-        ); // 1st .then() will get readable stream and convert it to json, 2nd .then() will get the actual data
     }
 
     // Mount phase
@@ -32,7 +27,6 @@ function Post() {
                 setLoad(false);
             } catch (error) {
                 setErr(true)
-                setLoad(false);
                 console.error("Error fetching post:", error);
             }
         }
