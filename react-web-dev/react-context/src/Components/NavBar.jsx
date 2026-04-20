@@ -1,5 +1,9 @@
+import { useContext } from "react";
+import { ThemeContext } from "../Context/Theme";
+
 export default function NavBar() {
-    return (
-        <h1 className="text-2xl font-bold">My Website</h1>
-    );
+  const themeColor = useContext(ThemeContext);
+  console.log(themeColor);
+
+  return <h1 style={{ color: themeColor.clr }}>My Nav</h1>;
 }
