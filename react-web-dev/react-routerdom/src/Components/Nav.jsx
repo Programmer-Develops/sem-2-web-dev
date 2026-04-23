@@ -1,6 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Nav() {
+    const activeStyle = {
+        color: "red",
+        textDecoration: "underline"
+    }
+    const activeClassName = "active-link"
     const Links = [
         {
             path: "/",
@@ -33,10 +38,22 @@ export default function Nav() {
             <Link to="/user"><h3>User</h3></Link> */}
 
             {/* Method 2 */}
-            {Links.map((link) => (
+            {/* {Links.map((link) => (
                 <Link key={link.path} to={link.path}>
                     <h3>{link.name}</h3>
                 </Link>
+            ))} */}
+
+            {/* Method 3 */}
+            {Links.map((link) => (
+                <NavLink
+                    key={link.path}
+                    to={link.path}
+                    style={({ isActive }) => (isActive ? activeStyle : {})}
+                    className={({ isActive }) => (isActive ? activeClassName : undefined)}
+                >
+                    <h3>{link.name}</h3>
+                </NavLink>
             ))}
         </div>
     )
