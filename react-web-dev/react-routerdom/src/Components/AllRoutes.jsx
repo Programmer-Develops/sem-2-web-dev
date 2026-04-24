@@ -13,6 +13,7 @@ export default function AllRoutes() {
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/user" element={<User />} />
+            <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
     )
 }
