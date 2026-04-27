@@ -1,3 +1,11 @@
+import { useEffect, useState } from "react"
+
 export default function User() {
-    return <h1>User Page</h1>
+    const [user, setUser] = useState([])
+    
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(res => res.json())
+            .then(data => setUser(data))
+    }
 }
